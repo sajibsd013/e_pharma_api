@@ -26,11 +26,11 @@ class RegistrationView(APIView):
 
 class LoginView(APIView):
     def post(self, request):
-        if 'email' not in request.data or 'password' not in request.data:
+        if 'phone' not in request.data or 'password' not in request.data:
             return Response({'msg': 'Credentials missing'}, status=status.HTTP_400_BAD_REQUEST)
-        email = request.data.get('email')
+        phone = request.data.get('phone')
         password = request.data.get('password')
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, phone=phone, password=password)
         if user is not None:
             login(request, user)
             auth_data = get_tokens_for_user(request.user)
@@ -66,6 +66,6 @@ class CurrentLoggedInUser(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        user_profile = self.queryset.get(email=request.user.email)
+        user_profile = self.queryset.get(phone=request.user.phone)
         serializer = self.get_serializer(user_profile)
         return Response({'user': serializer.data})

@@ -14,7 +14,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'date_of_birth', 'credits')
+        fields = ('phone', 'full_name')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -38,8 +38,8 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'password', 'date_of_birth',
-                  'is_active', 'is_admin', 'credits')
+        fields = ('phone', 'password', 'full_name',
+                  'is_active', 'is_admin')
 
     def clean_password(self):
         return self.initial["password"]
@@ -49,22 +49,21 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('email', 'date_of_birth', 'is_admin', 'credits')
+    list_display = ('phone', 'full_name', 'is_admin')
     list_filter = ('is_admin', )
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('date_of_birth',)}),
+        (None, {'fields': ('phone', 'password')}),
+        ('Personal info', {'fields': ('full_name',)}),
         ('Permissions', {'fields': ('is_admin',)}),
-        ('Site Info', {'fields': ('credits', )}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'date_of_birth', 'password1', 'password2', 'credits'),
+            'fields': ('phone', 'full_name', 'password1', 'password2'),
         }),
     )
-    search_fields = ('email',)
-    ordering = ('email',)
+    search_fields = ('phone',)
+    ordering = ('phone',)
     filter_horizontal = ()
 
 

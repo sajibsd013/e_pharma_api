@@ -8,14 +8,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MyUser
-        fields = ['email', 'date_of_birth', 'password', 'password2']
+        fields = ['phone', 'full_name', 'password', 'password2']
         extra_kwargs = {
             'password': {'write_only': True}
         }
 
     def save(self):
         user = MyUser(
-            email=self.validated_data['email'], date_of_birth=self.validated_data['date_of_birth'])
+            phone=self.validated_data['phone'], full_name=self.validated_data['full_name'])
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
         if password != password2:
@@ -42,4 +42,4 @@ class PasswordChangeSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
-        fields = ['email', 'date_of_birth']
+        fields = ['phone', 'full_name']
