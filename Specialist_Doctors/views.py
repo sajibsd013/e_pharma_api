@@ -11,7 +11,7 @@ from .serializers import SpecialistDoctorSerializer, SpecialistDoctorsAppointmen
 # Create your views here.
 
 
-@custom_view_decorator
+# @custom_view_decorator
 @api_view(['GET'])
 def doctors_list(request):
     if request.method == 'GET':
@@ -20,7 +20,7 @@ def doctors_list(request):
         return Response(serializer.data)
 
 
-@custom_view_decorator
+# @custom_view_decorator
 @api_view(['GET'])
 def doctors_detail(request, pk):
     try:
@@ -33,7 +33,7 @@ def doctors_detail(request, pk):
         return Response(serializer.data)
 
 
-@custom_view_decorator
+# @custom_view_decorator
 @api_view(['POST'])
 def appointment(request):
     if request.method == 'POST':

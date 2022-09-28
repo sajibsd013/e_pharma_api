@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-
+import datetime
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,6 +30,27 @@ ALLOWED_HOSTS = ["api.sasthosebok.com",
                  "sasthosebok.com", "127.0.0.1", "localhost"]
 
 
+EST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +65,7 @@ INSTALLED_APPS = [
     'api',
     'Specialist_Doctors',
     'Videocall_Expert_Doctor',
+    'users',
 
 ]
 
@@ -146,3 +168,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Variable
 API_TOKEN = 'y6&kvg54iu%!tg!aoas9d+$titza-d9w6%*6%f@4v1w5x=l(+9'
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_PROFILE_MODULE = 'users.MyUser'
+
+AUTH_USER_MODEL = 'users.MyUser'
