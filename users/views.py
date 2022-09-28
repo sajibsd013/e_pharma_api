@@ -26,11 +26,12 @@ class RegistrationView(APIView):
 
 class LoginView(APIView):
     def post(self, request):
-        if 'phone' not in request.data or 'password' not in request.data:
+        print(request.data.get("phone"))
+        if 'phone' not in request.data:
             return Response({'msg': 'Credentials missing'}, status=status.HTTP_400_BAD_REQUEST)
         phone = request.data.get('phone')
-        password = request.data.get('password')
-        user = authenticate(request, phone=phone, password=password)
+        # password = request.data.get('password')
+        user = authenticate(request, username=phone, password="None")
         if user is not None:
             login(request, user)
             auth_data = get_tokens_for_user(request.user)
