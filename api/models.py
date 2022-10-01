@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 from django.utils.timezone import now
 
@@ -27,3 +28,25 @@ class Faqs(models.Model):
     class Meta:
         verbose_name_plural = "FAQs "
         db_table = "Faqs"
+
+
+class OTP(models.Model):
+    phone = models.CharField(max_length=120, unique=True)
+    otp = models.CharField(max_length=120)
+    created_date = models.DateTimeField(default=now, editable=False)
+
+    class Meta:
+        verbose_name_plural = "OTP "
+        db_table = "OTP"
+
+
+class SMS_TOKEN(models.Model):
+    token = models.CharField(max_length=220)
+    status = models.CharField(max_length=120)
+    api_url = models.CharField(max_length=220, null=True)
+
+    created_date = models.DateTimeField(default=now, editable=False)
+
+    class Meta:
+        verbose_name_plural = "SMS TOKEN "
+        db_table = "SMS_TOKEN"
