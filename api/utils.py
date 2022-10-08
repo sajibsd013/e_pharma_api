@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from users.models import MyUser
 from random import randrange
 from .models import OTP, SMS_TOKEN
@@ -8,7 +7,7 @@ import requests
 
 def send_otp_checker(phone, type):
     res = {
-        "msg": NULL, "c_type": False
+        "msg": 'NULL', "c_type": False
     }
 
     try:
@@ -38,7 +37,7 @@ def send_otp(to, otp):
     token_dist = SMS_TOKEN.objects.get(status="active")
     token = token_dist.token
     api_url = token_dist.api_url
-    msg = f"Your OTP is {otp}"
+    msg = f"Your Verification Code is {otp}"
 
     data = {'token': token,
             'to': to,
