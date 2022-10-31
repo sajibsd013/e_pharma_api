@@ -1,3 +1,4 @@
+from warnings import filters
 from django.contrib import admin
 from .models import Faqs, Services, OTP, SMS_TOKEN
 
@@ -6,7 +7,7 @@ from .models import Faqs, Services, OTP, SMS_TOKEN
 
 
 class SMS_TOKENAdmin(admin.ModelAdmin):
-    list_display = ["id", "token", "status", "api_url", "created_date"]
+    list_display = ["token", "status", "api_url", "created_date"]
 
     class Meta:
         model = SMS_TOKEN
@@ -36,7 +37,7 @@ admin.site.register(Services, ServicesAdmin)
 
 
 class FaqsAdmin(admin.ModelAdmin):
-    list_display = ["id", "ques", "ans"]
+    list_display = ["ques", "ans"]
 
     class Meta:
         model = Faqs

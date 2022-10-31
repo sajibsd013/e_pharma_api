@@ -3,11 +3,10 @@ from .models import Services, Faqs
 from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer
 from rest_framework import viewsets, pagination
 from rest_framework.parsers import MultiPartParser, FormParser
-
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .utils import send_otp_checker, send_otp
+from .utils import send_otp_checker, send_sms, send_otp
 from random import randrange
 from .models import OTP
 # Create your views here.
@@ -58,14 +57,14 @@ def set_otp(request):
                 otp_dict = OTP.objects.filter(phone=phone).update(otp=otp)
                 if otp_dict:
                     # send otp
-                    send_otp(phone, otp)
+                    # send_otp(phone, otp)
                     return Response("success", status=status.HTTP_201_CREATED)
                 else:
                     serializer = OtpSerializer(
                         data={"phone": phone, "otp": otp})
                     if serializer.is_valid():
                         # send otp
-                        send_otp(phone, otp)
+                        # send_otp(phone, otp)
 
                         serializer.save()
                         return Response("success", status=status.HTTP_201_CREATED)

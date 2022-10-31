@@ -24,5 +24,6 @@ urlpatterns = [
     path('auth/', include('users.urls')),
     path('specialist-doctors/', include('Specialist_Doctors.urls')),
     path('videocall-doctors/', include('Videocall_Expert_Doctor.urls')),
+    path('patners/', include('partners.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -50,3 +50,22 @@ def send_otp(to, otp):
     print(response, responses)
 
     # return response
+
+
+def send_sms(to, msg):
+
+    token_dist = SMS_TOKEN.objects.get(status="active")
+    token = token_dist.token
+    api_url = token_dist.api_url
+    msg = msg
+    data = {'token': token,
+            'to': to,
+            'message': msg
+            }
+
+    responses = requests.post(url=api_url, data=data)
+
+    response = responses.text
+    print(response, responses)
+
+    # return response

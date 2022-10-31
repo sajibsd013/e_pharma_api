@@ -33,4 +33,4 @@ class PasswordChangeSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
-        fields = ['phone', 'full_name']
+        fields = "__all__"
