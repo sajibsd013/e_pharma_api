@@ -31,16 +31,20 @@ class DMF_Doctor(models.Model):
     bmdc_regi_no = models.CharField(max_length=120)
     type = models.CharField(max_length=120)
     working_area = models.CharField(
-        max_length=120, null=True, blank=True, default="N/A")
+        max_length=120, null=True, blank=True)
     working_days = models.CharField(max_length=120)
     working_times = models.CharField(max_length=120)
-    experience = models.TextField()
+    working_times = models.CharField(max_length=120)
+    payment_method = models.CharField(max_length=120, null=True)
+    payment_number = models.CharField(max_length=120, null=True)
     status = models.CharField(
         max_length=120, choices=STATUS_CHOICES, default="pending", )
     image_url = models.ImageField(
         upload_to=upload_to_doctor, blank=True, null=True)
+    experience = models.TextField()
+
     institution_or_chamber_address = models.TextField(
-        null=True, blank=True, default="N/A")
+        null=True, blank=True)
     short_description = models.TextField()
     created_date = models.DateTimeField(default=now, editable=False)
 
@@ -61,18 +65,22 @@ class Doctor(models.Model):
     bmdc_regi_no = models.CharField(max_length=120)
     type = models.CharField(max_length=120)
     city = models.CharField(
-        max_length=120, null=True, blank=True, default="N/A")
+        max_length=120, null=True, blank=True, )
     working_area = models.CharField(
-        max_length=500, null=True, blank=True, default="N/A")
+        max_length=500, null=True, blank=True, )
     working_days = models.CharField(max_length=120)
     working_times = models.CharField(max_length=120)
-    experience = models.TextField()
+    gender = models.CharField(
+        max_length=120, choices=GENDER, null=True)
+    payment_method = models.CharField(max_length=120, null=True)
+    payment_number = models.CharField(max_length=120, null=True)
     status = models.CharField(
         max_length=120, choices=STATUS_CHOICES, default="pending", )
     image_url = models.ImageField(
-        upload_to=upload_to_doctor, blank=True, null=True)
+        upload_to=upload_to_doctor, null=True)
+    experience = models.TextField()
     institution_or_chamber_address = models.TextField(
-        null=True, blank=True, default="N/A")
+        null=True, blank=True, )
     short_description = models.TextField()
     created_date = models.DateTimeField(default=now, editable=False)
 
@@ -123,7 +131,7 @@ class CareGiver(models.Model):
     image_url = models.ImageField(
         upload_to=upload_to_caregiver, blank=True, null=True)
     institution = models.TextField(
-        null=True, blank=True, default="N/A")
+        null=True, blank=True, )
     short_description = models.TextField()
     created_date = models.DateTimeField(default=now, editable=False)
 
@@ -146,7 +154,7 @@ class Nurse(models.Model):
     working_days = models.CharField(max_length=120)
     working_times = models.CharField(max_length=120)
     institution = models.TextField(
-        null=True, blank=True, default="N/A")
+        null=True, blank=True, )
     status = models.CharField(
         max_length=120, choices=STATUS_CHOICES, default="pending")
     gender = models.CharField(

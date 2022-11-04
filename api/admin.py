@@ -1,9 +1,20 @@
 from warnings import filters
 from django.contrib import admin
-from .models import Faqs, Services, OTP, SMS_TOKEN
+from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation
 
 
 # Register your models here.
+
+
+class GenaralInformationAdmin(admin.ModelAdmin):
+    list_display = ["name", "address", "email",
+                    "phone_1", "phone_2", "description"]
+
+    class Meta:
+        model = GenaralInformation
+
+
+admin.site.register(GenaralInformation, GenaralInformationAdmin)
 
 
 class SMS_TOKENAdmin(admin.ModelAdmin):

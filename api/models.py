@@ -51,3 +51,16 @@ class SMS_TOKEN(models.Model):
     class Meta:
         verbose_name_plural = "SMS TOKEN "
         db_table = "SMS_TOKEN"
+
+
+class GenaralInformation(models.Model):
+    name = models.CharField(max_length=220)
+    address = models.CharField(max_length=220)
+    email = models.CharField(max_length=220)
+    phone_1 = models.CharField(max_length=16)
+    phone_2 = models.CharField(max_length=16)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Genaral Information"
+        db_table = "GenaralInformation"

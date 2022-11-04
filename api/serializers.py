@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from .models import Services, Faqs, OTP, SMS_TOKEN
+from .models import Services, Faqs, OTP, SMS_TOKEN, GenaralInformation
+
+
+class GenaralInformationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GenaralInformation
+        fields = "__all__"
 
 
 class ServiceSerializer(serializers.ModelSerializer):

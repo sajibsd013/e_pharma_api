@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Services, Faqs
-from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer
+from .models import Services, Faqs, GenaralInformation
+from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer, GenaralInformationSerializer
 from rest_framework import viewsets, pagination
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
@@ -40,6 +40,15 @@ def faqs_list(request):
         return Response(serializer.data)
 
 
+@api_view(['GET'])
+def genaral_information(request):
+    if request.method == 'GET':
+        genaral_information = GenaralInformation.objects.all()
+        serializer = GenaralInformationSerializer(
+            genaral_information, many=True)
+        return Response(serializer.data)
+
+
 # @custom_view_decorator
 
 
@@ -57,14 +66,14 @@ def set_otp(request):
                 otp_dict = OTP.objects.filter(phone=phone).update(otp=otp)
                 if otp_dict:
                     # send otp
-                    # send_otp(phone, otp)
+                    send_otp(phone, otp)
                     return Response("success", status=status.HTTP_201_CREATED)
                 else:
                     serializer = OtpSerializer(
                         data={"phone": phone, "otp": otp})
                     if serializer.is_valid():
                         # send otp
-                        # send_otp(phone, otp)
+                        send_otp(phone, otp)
 
                         serializer.save()
                         return Response("success", status=status.HTTP_201_CREATED)
