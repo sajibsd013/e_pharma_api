@@ -22,39 +22,36 @@ def upload_to_dmp_doctor(instance, filename):
     return 'images/dmp_doctor/{filename}'.format(filename=filename)
 
 
+def upload_to_certificate(instance, filename):
+    return 'images/certificate/{filename}'.format(filename=filename)
+
+
 class DMF_Doctor(models.Model):
     name = models.CharField(max_length=120)
     mobile = models.CharField(max_length=120, unique=True)
     qualicifacions = models.CharField(max_length=120)
     specialty = models.CharField(max_length=120)
-    bmdc_regi_no = models.CharField(max_length=120, unique=True)
-    type = models.CharField(max_length=120)
+    type = models.CharField(max_length=120, null=True, blank=True)
     city = models.CharField(
         max_length=120, null=True, blank=True)
     working_area = models.CharField(
         max_length=500, null=True, blank=True, )
-    working_days_home_call = models.CharField(
+    working_days = models.CharField(
         max_length=120, null=True, blank=True)
-    working_days_video_call = models.CharField(
+    working_times = models.CharField(
         max_length=120, null=True, blank=True)
-    working_times_chamber = models.CharField(
-        max_length=120, null=True, blank=True)
-    working_times_home_call = models.CharField(
-        max_length=120, null=True, blank=True)
-    working_times_video_call = models.CharField(
-        max_length=120, null=True, blank=True)
+
     gender = models.CharField(
         max_length=120, null=True, blank=True)
 
-    fee_video_call = models.CharField(
-        max_length=120, null=True, blank=True)
     payment_method = models.CharField(max_length=120, null=True)
     payment_number = models.CharField(max_length=120, null=True)
-    whatsapp_number = models.CharField(max_length=120, null=True, blank=True)
     status = models.CharField(
         max_length=120, choices=STATUS_CHOICES, default="pending", )
     image_url = models.ImageField(
         upload_to=upload_to_dmp_doctor, null=True)
+    certificate = models.ImageField(
+        upload_to=upload_to_certificate, null=True)
     experience = models.TextField()
     institution_or_chamber_address = models.TextField(
         null=True, blank=True, )
