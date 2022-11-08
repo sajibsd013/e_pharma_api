@@ -68,4 +68,7 @@ def send_sms(to, msg):
     response = responses.text
     print(response, responses)
 
-    # return response
+    if "Error" in response:
+        return False
+
+    return True

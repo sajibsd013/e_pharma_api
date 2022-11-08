@@ -23,11 +23,15 @@ class DoctotList(APIView):
         serializer = DoctorSerializer(data=request.data)
         if serializer.is_valid():
             mobile = request.data.get("mobile")
-            send_sms(mobile, "Registration Success, We will contact you soon")
-            send_sms("+8801959970664, +8801771147384",
-                     f"{mobile} Registered as a Doctor")
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            s1 = send_sms(
+                mobile, "Registration Success, We will contact you soon")
+
+            if s1:
+                send_sms("+8801959970664, +8801771147384",
+                         f"{mobile} Registered as a Doctor")
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -38,11 +42,15 @@ def dmf_doctor(request):
         mobile = request.data.get("mobile")
         if serializer.is_valid():
             # send sms to admin and user
-            send_sms(mobile, "Registration Success, We will contact you soon")
-            send_sms("+8801959970664, +8801771147384",
-                     f"{mobile} Registered as a DMF Doctor")
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            s1 = send_sms(
+                mobile, "Registration Success, We will contact you soon")
+
+            if s1:
+                send_sms("+8801959970664, +8801771147384",
+                         f"{mobile} Registered as a DMF/CP Doctor")
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -69,12 +77,16 @@ def partner(request):
         mobile = request.data.get("mobile")
 
         if serializer.is_valid():
-            # send sms to admin and user
-            send_sms(mobile, "Registration Success, We will contact you soon")
-            send_sms("+8801959970664, +8801771147384",
-                     f"{mobile} Registered as a Partner")
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+            s1 = send_sms(
+                mobile, "Registration Success, We will contact you soon")
+
+            if s1:
+                send_sms("+8801959970664, +8801771147384",
+                         f"{mobile} Registered as a partner")
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -85,12 +97,16 @@ def care_giver(request):
         mobile = request.data.get("mobile")
 
         if serializer.is_valid():
-            # send sms to admin and user
-            send_sms(mobile, "Registration Success, We will contact you soon")
-            send_sms("+8801959970664, +8801771147384",
-                     f"{mobile} Registered as a caregiver ")
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+            s1 = send_sms(
+                mobile, "Registration Success, We will contact you soon")
+
+            if s1:
+                send_sms("+8801959970664, +8801771147384",
+                         f"{mobile} Registered as a caregiver")
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -102,11 +118,15 @@ def physiotherapist(request):
 
         if serializer.is_valid():
             # send sms to admin and user
-            send_sms(mobile, "Registration Success, We will contact you soon")
-            send_sms("+8801959970664, +8801771147384",
-                     f"{mobile} Registered as a physiotherapist")
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            s1 = send_sms(
+                mobile, "Registration Success, We will contact you soon")
+
+            if s1:
+                send_sms("+8801959970664, +8801771147384",
+                         f"{mobile} Registered as a physiotherapist")
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -117,10 +137,13 @@ def nurse_regi(request):
         mobile = request.data.get("mobile")
 
         if serializer.is_valid():
-            # send sms to admin and user
-            send_sms(mobile, "Registration Success, We will contact you soon")
-            send_sms("+8801959970664, +8801771147384",
-                     f"{mobile} Registered as a nurse/brother")
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            s1 = send_sms(
+                mobile, "Registration Success, We will contact you soon")
+
+            if s1:
+                send_sms("+8801959970664, +8801771147384",
+                         f"{mobile} Registered as a Nurse/Midwife")
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
