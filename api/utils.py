@@ -39,13 +39,19 @@ def send_otp(to, otp):
     api_url = token_dist.api_url
     msg = f"Your Verification Code is {otp}"
 
-    data = {'token': token,
-            'to': to,
-            'message': msg
-            }
+    headers = {
+        'Authorization': token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
 
-    responses = requests.post(url=api_url, data=data)
+    data = {
+        'recipient': to,
+        'sender_id': '8809601003724',
+        'message': msg
+    }
 
+    responses = requests.post(url=api_url,  headers=headers,  json=data)
     response = responses.text
     print(response, responses)
 
@@ -53,22 +59,23 @@ def send_otp(to, otp):
 
 
 def send_sms(to, msg):
-
     token_dist = SMS_TOKEN.objects.get(status="active")
     token = token_dist.token
     api_url = token_dist.api_url
-    msg = msg
-    data = {'token': token,
-            'to': to,
-            'message': msg
-            }
 
-    responses = requests.post(url=api_url, data=data)
+    headers = {
+        'Authorization': token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
 
+    data = {
+        'recipient': to,
+        'sender_id': '8809601003724',
+        'message': msg
+    }
+
+    responses = requests.post(url=api_url,  headers=headers,  json=data)
     response = responses.text
     print(response, responses)
-
-    if "Error" in response:
-        return False
-
-    return True
+    return responses.status_code

@@ -67,7 +67,7 @@ def set_otp(request):
                 if otp_dict:
                     # send otp
                     send_otp(phone, otp)
-                    return Response("success", status=status.HTTP_201_CREATED)
+                    return Response({"otp": otp, "to": phone}, status=status.HTTP_201_CREATED)
                 else:
                     serializer = OtpSerializer(
                         data={"phone": phone, "otp": otp})
@@ -76,7 +76,7 @@ def set_otp(request):
                         send_otp(phone, otp)
 
                         serializer.save()
-                        return Response("success", status=status.HTTP_201_CREATED)
+                        return Response({"otp": otp, "to": phone}, status=status.HTTP_201_CREATED)
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
             except:
