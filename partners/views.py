@@ -30,6 +30,23 @@ class DoctotList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def get(self, request, format=None):
+        doctor = Doctor.objects.all()
+        serializer = DoctorSerializer(doctor, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def doctor_details(request, pk):
+    try:
+        doctor = Doctor.objects.get(pk=pk)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = DoctorSerializer(doctor)
+        return Response(serializer.data)
+
 
 @api_view(['POST'])
 def dmf_doctor(request):

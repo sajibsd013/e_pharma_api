@@ -15,7 +15,8 @@ urlpatterns = [
     path('physiotherapist-regi/', views.physiotherapist),
     path('partner-regi/', views.partner),
     # path('doctor-regi/', views.doctor),
-    path('doctor-regi/', views.DoctotList.as_view()),
+    path('doctor/', views.DoctotList.as_view()),
+    path('doctor/<int:pk>', views.doctor_details),
     path('dmf-doctor-regi/', views.dmf_doctor),
     path('', include(router.urls)),
 ]

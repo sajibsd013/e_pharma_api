@@ -8,10 +8,15 @@ import datetime
 credits = models.PositiveIntegerField(default=100)
 
 
-DISCOUNT_CODE_TYPES_CHOICES = [
-    ('percent', 'Percentage-based'),
-    ('value', 'Value-based'),
-]
+USER_TYPE = (
+    ('user', 'user'),
+    ('doctor', 'doctor'),
+    ('nurse', 'nurse'),
+    ('caregiver', 'caregiver'),
+    ('physiotherapist', 'physiotherapist'),
+    ('partner ', 'partner '),
+    ('patient', 'patient'),
+)
 
 
 # Create your models here
@@ -58,6 +63,8 @@ class MyUser(AbstractBaseUser):
     )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    user_type = models.CharField(
+        max_length=120, choices=USER_TYPE, default="User", )
     expiry_date = models.DateTimeField(null=True, blank=True)
     objects = MyUserManager()
 
@@ -82,3 +89,6 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    class Meta:
+        verbose_name_plural = "Users"

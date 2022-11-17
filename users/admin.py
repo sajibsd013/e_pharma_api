@@ -52,14 +52,14 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('phone', 'full_name', 'is_admin')
     list_filter = ('is_admin', )
     fieldsets = (
-        (None, {'fields': ('phone', 'password')}),
+        (None, {'fields': ('phone', 'password', 'user_type')}),
         ('Personal info', {'fields': ('full_name',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('phone', 'full_name', 'password1', 'password2'),
+            'fields': ('phone', 'full_name', 'password1', 'password2', 'user_type'),
         }),
     )
     search_fields = ('phone',)
