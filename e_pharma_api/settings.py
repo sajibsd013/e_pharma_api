@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'Videocall_Expert_Doctor',
     'users',
     'partners',
+    'appointment',
 
 ]
 

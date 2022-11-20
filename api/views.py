@@ -57,6 +57,7 @@ def set_otp(request):
     if request.method == 'POST':
         phone = request.data.get("phone")
         type = request.data.get("type")
+        print(phone)
 
         otp = randrange(1000, 9999)
         check = send_otp_checker(phone, type)

@@ -18,5 +18,5 @@ urlpatterns = [
     path('doctor/', views.DoctotList.as_view()),
     path('doctor/<int:pk>', views.doctor_details),
     path('dmf-doctor-regi/', views.dmf_doctor),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
 ]
