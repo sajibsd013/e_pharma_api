@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from partners.models import Doctor
+from users.models import MyUser
 
 # Create your models here.
 STATUS_CHOICES = (
@@ -27,6 +28,8 @@ class DoctorsAppointment(models.Model):
     fee = models.CharField(max_length=120)
     doctor_id = models.ForeignKey(
         Doctor, verbose_name="Doctor", on_delete=models.CASCADE)
+    user_id = models.ForeignKey(
+        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True)
     date = models.DateTimeField()
     created_date = models.DateTimeField(default=now, editable=False)
     payment_method = models.CharField(
