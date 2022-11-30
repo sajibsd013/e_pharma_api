@@ -24,7 +24,7 @@ class DoctotList(APIView):
         if serializer.is_valid():
             mobile = request.data.get("mobile")
             serializer.save()
-            msg = 'Dear doctor! Thank you very much for registering as a doctor at sasthosebok.com Take advantage of digitalization, serve more patients.'
+            msg = 'Dear doctor! Thank you very much for registering as a doctor at sasthosebok.com Take advantage of digitalization, serve more patients. Call if necessary +8801959970664'
             send_sms(mobile, msg)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -68,22 +68,6 @@ def dmf_doctor(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(['POST'])
-# @parser_classes([MultiPartParser, ])
-# def doctor(request):
-#     if request.method == 'POST':
-#         serializer = DoctorSerializer(data=request.data)
-#         mobile = request.data.get("mobile")
-#         if serializer.is_valid():
-#             # send sms to admin and user
-#             # send_sms(mobile, "Registration Success, We will contact you soon")
-#             # send_sms("+8801959970664, +8801771147384",
-#             #          f"{mobile} Registered as a Doctor")
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['POST'])
 def partner(request):
     if request.method == 'POST':
@@ -106,14 +90,9 @@ def care_giver(request):
         mobile = request.data.get("mobile")
 
         if serializer.is_valid():
-
-            # s1 = send_sms(
-            #     mobile, "Registration Success, We will contact you soon")
-
-            # if s1:
-            #     send_sms("+8801959970664, +8801771147384",
-            #              f"{mobile} Registered as a caregiver")
             serializer.save()
+            msg = 'sasthosebok.com এ CareGiver সার্ভিস নিবন্ধনের জন্য আপনাকে ধন্যবাদ। প্রয়োজনে কল করুন +8801959970664'
+            send_sms(mobile, msg)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -126,14 +105,9 @@ def physiotherapist(request):
         mobile = request.data.get("mobile")
 
         if serializer.is_valid():
-            # send sms to admin and user
-            # s1 = send_sms(
-            #     mobile, "Registration Success, We will contact you soon")
-
-            # if s1:
-            #     send_sms("+8801959970664, +8801771147384",
-            #              f"{mobile} Registered as a physiotherapist")
             serializer.save()
+            msg = 'sasthosebok.com এ ফিজিওথেরাপিস্ট সার্ভিস নিবন্ধনের জন্য আপনাকে ধন্যবাদ। প্রয়োজনে কল করুন +8801959970664'
+            send_sms(mobile, msg)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -146,13 +120,9 @@ def nurse_regi(request):
         mobile = request.data.get("mobile")
 
         if serializer.is_valid():
-            # s1 = send_sms(
-            #     mobile, "Registration Success, We will contact you soon")
-
-            # if s1:
-            #     send_sms("+8801959970664, +8801771147384",
-            #              f"{mobile} Registered as a Nurse/Midwife")
             serializer.save()
+            msg = 'sasthosebok.com এ হোম-নার্সিং/মিডওয়াইফারি সার্ভিস নিবন্ধনের জন্য আপনাকে ধন্যবাদ। প্রয়োজনে কল করুন +8801959970664'
+            send_sms(mobile, msg)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

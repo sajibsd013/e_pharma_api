@@ -8,11 +8,12 @@ from users.models import MyUser
 
 # lets us explicitly set upload path and filename
 def upload_to_services(instance, filename):
-    return 'images/doctors/{filename}'.format(filename=filename)
+    return 'images/services/{filename}'.format(filename=filename)
 
 
 class Services(models.Model):
     title = models.CharField(max_length=120)
+    path = models.CharField(max_length=120, blank=True, null=True)
     image_url = models.ImageField(
         upload_to=upload_to_services, blank=True, null=True)
     description = models.TextField()

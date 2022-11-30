@@ -5,7 +5,7 @@ from rest_framework import status
 from e_pharma_api.view_decorator import custom_view_decorator
 
 from django.shortcuts import render
-from .models import SpecialistDoctor, SpecialistDoctorsAppointment
+from .models import SpecialistDoctor
 from .serializers import SpecialistDoctorSerializer, SpecialistDoctorsAppointmentSerializer
 
 # Create your views here.

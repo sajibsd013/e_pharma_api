@@ -102,7 +102,7 @@ class Doctor(models.Model):
         max_length=120, choices=STATUS_CHOICES, default="pending", )
     image_url = models.ImageField(
         upload_to=upload_to_doctor, null=True)
-    experience = models.TextField()
+    experience = models.TextField(null=True, blank=True)
     institution_or_chamber_address = models.TextField(
         null=True, blank=True, )
     short_description = models.TextField()

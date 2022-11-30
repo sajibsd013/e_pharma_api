@@ -6,9 +6,12 @@ from users.models import MyUser
 # Create your models here.
 STATUS_CHOICES = (
     ('pending', 'pending'),
+    ('cancelled', 'cancelled'),
+    ('completed', 'completed'),
     ('approved', 'approved'),
 )
 PAYMENT_CHOICES = (
+    ('unpaid', 'unpaid'),
     ('pending', 'pending'),
     ('paid', 'paid'),
 )
@@ -27,16 +30,16 @@ class DoctorsAppointment(models.Model):
     type = models.CharField(max_length=120)
     fee = models.CharField(max_length=120)
     doctor_id = models.ForeignKey(
-        Doctor, verbose_name="Doctor", on_delete=models.CASCADE)
+        Doctor, verbose_name="Doctor", on_delete=models.CASCADE, null=True, blank=True)
     user_id = models.ForeignKey(
-        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True)
+        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateTimeField()
     created_date = models.DateTimeField(default=now, editable=False)
     payment_method = models.CharField(
         max_length=120, choices=PAYMENT_METHOD, default="Bkash", )
     transaction_id = models.CharField(max_length=120, null=True, blank=True)
     payment_status = models.CharField(
-        max_length=120, choices=PAYMENT_CHOICES, default="pending", )
+        max_length=120, choices=PAYMENT_CHOICES, default="unpaid", )
     service_status = models.CharField(
         max_length=120, choices=STATUS_CHOICES, default="pending", )
     details = models.TextField()

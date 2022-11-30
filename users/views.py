@@ -71,7 +71,6 @@ class ChangePasswordView(APIView):
 class CurrentLoggedInUser(viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
     authentication_classes = (JWTAuthentication,)
-
     permission_classes = (IsAuthenticated,)
 
     serializer_class = UserSerializer
