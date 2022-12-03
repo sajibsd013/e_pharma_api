@@ -31,7 +31,7 @@ admin.site.register(Doctor, DoctorAdmin)
 
 
 class PartnerAdmin(admin.ModelAdmin):
-    list_display = ["name", "working_area", "status"]
+    list_display = ["name", "working_area", "mobile", "status"]
     search_fields = ("name", "working_area", "status")
     list_filter = ("working_area",
                    "status")
@@ -45,7 +45,7 @@ admin.site.register(Partner, PartnerAdmin)
 
 class CareGiverAdmin(admin.ModelAdmin):
     list_display = ["name", "working_area",
-                    "working_days", "status"]
+                    "working_days", "mobile", "status"]
     search_fields = ("name", "working_area", "working_days", "status")
     list_filter = ("working_area",
                    "status")
@@ -59,7 +59,7 @@ admin.site.register(CareGiver, CareGiverAdmin)
 
 class PhysiotherapistAdmin(admin.ModelAdmin):
     list_display = ["name", "working_area",
-                    "working_days", "working_times", "status"]
+                    "working_days", "working_times", "mobile", "status"]
     search_fields = ("name", "working_area", "working_days",
                      "working_times", "status")
     # filter_horizontal = ("status",)
@@ -75,7 +75,7 @@ admin.site.register(Physiotherapist, PhysiotherapistAdmin)
 
 class NurseAdmin(admin.ModelAdmin):
     list_display = ["name", "working_area",
-                    "working_days", "working_times", "status"]
+                    "working_days", "mobile", "status"]
     search_fields = ("name", "working_area", "working_days",
                      "working_times", "status")
     # filter_horizontal = ("status",)

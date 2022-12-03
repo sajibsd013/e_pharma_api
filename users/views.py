@@ -10,6 +10,10 @@ from .utils import get_tokens_for_user, isOtpMatcheed
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.decorators import permission_classes, authentication_classes, api_view
+from .models import MyUser
+from .serializers import UserSerializer
+
 
 from .serializers import RegistrationSerializer, PasswordChangeSerializer, UserSerializer
 # Create your views here.
@@ -20,7 +24,6 @@ class RegistrationView(APIView):
         phone = request.data.get("phone")
         otp = request.data.get("otp")
         is_matched = isOtpMatcheed(phone, otp, "regi")
-
         if is_matched:
             serializer = RegistrationSerializer(data=request.data)
             if serializer.is_valid():
@@ -79,3 +82,32 @@ class CurrentLoggedInUser(viewsets.ModelViewSet):
         user_profile = self.queryset.get(phone=request.user.phone)
         serializer = self.get_serializer(user_profile)
         return Response({'user': serializer.data})
+
+
+@api_view(['PUT', 'GET', 'DELETE'])
+@permission_classes((IsAuthenticated,))
+@authentication_classes((JWTAuthentication,))
+def UserDetail(request, pk):
+    """
+    Retrieve, update or delete a code  MyUser.
+    """
+    try:
+        user = MyUser.objects.get(pk=pk)
+    except user.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = UserSerializer(
+            user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -9,7 +9,6 @@ credits = models.PositiveIntegerField(default=100)
 
 
 USER_TYPE = (
-    ('user', 'user'),
     ('doctor', 'doctor'),
     ('nurse', 'nurse'),
     ('caregiver', 'caregiver'),
@@ -69,7 +68,7 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     user_type = models.CharField(
-        max_length=120, choices=USER_TYPE, default="User", )
+        max_length=120, choices=USER_TYPE, default="patient", )
     expiry_date = models.DateTimeField(null=True, blank=True)
     objects = MyUserManager()
 

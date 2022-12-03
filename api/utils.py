@@ -33,7 +33,6 @@ def send_otp_checker(phone, type):
 
 
 def send_otp(to, otp):
-
     token_dist = SMS_TOKEN.objects.get(status="active")
     token = token_dist.token
     api_url = token_dist.api_url
@@ -94,7 +93,7 @@ def send_admin_notifications(msg):
     }
 
     data = {
-        'recipient': "+8801959970664",
+        'recipient': "8801959970664",
         'sender_id': '8809601003724',
         'message': msg
     }
