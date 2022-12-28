@@ -35,7 +35,7 @@ class DMF_Doctor(models.Model):
     city = models.CharField(
         max_length=120, null=True, blank=True)
     working_area = models.CharField(
-        max_length=500, null=True, blank=True, )
+        max_length=2020, null=True, blank=True, )
     working_days = models.CharField(
         max_length=120, null=True, blank=True)
     working_times = models.CharField(
@@ -76,7 +76,7 @@ class Doctor(models.Model):
     city = models.CharField(
         max_length=120, null=True, blank=True)
     working_area = models.CharField(
-        max_length=500, null=True, blank=True, )
+        max_length=2020, null=True, blank=True, )
     working_days_chamber = models.CharField(
         max_length=120, null=True, blank=True)
     working_days_home_call = models.CharField(
@@ -126,7 +126,7 @@ class Partner(models.Model):
     tred_licence = models.CharField(max_length=120, unique=True, null=True)
     city = models.CharField(
         max_length=120, null=True, blank=True)
-    working_area = models.CharField(max_length=120)
+    working_area = models.CharField(max_length=2020)
     payment_method = models.CharField(max_length=120, null=True)
     payment_number = models.CharField(max_length=120, null=True)
     image_url = models.ImageField(
@@ -151,7 +151,7 @@ class CareGiver(models.Model):
     nid = models.CharField(max_length=120, unique=True, null=True)
     city = models.CharField(
         max_length=120, null=True, blank=True)
-    working_area = models.CharField(max_length=120)
+    working_area = models.CharField(max_length=2020)
     payment_method = models.CharField(max_length=120, null=True)
     payment_number = models.CharField(max_length=120, null=True)
     working_days = models.CharField(max_length=120)
@@ -184,7 +184,7 @@ class Nurse(models.Model):
     qualicifacions = models.CharField(max_length=120)
     city = models.CharField(
         max_length=120, null=True, blank=True)
-    working_area = models.CharField(max_length=120)
+    working_area = models.CharField(max_length=2020)
     payment_method = models.CharField(max_length=120, null=True)
     payment_number = models.CharField(max_length=120, null=True)
     working_days = models.CharField(max_length=120)
@@ -219,7 +219,7 @@ class Physiotherapist(models.Model):
     institution = models.CharField(max_length=120, null=True)
     city = models.CharField(
         max_length=120, null=True, blank=True)
-    working_area = models.CharField(max_length=120)
+    working_area = models.CharField(max_length=2020)
     payment_method = models.CharField(max_length=120, null=True)
     payment_number = models.CharField(max_length=120, null=True)
     working_days = models.CharField(max_length=120)

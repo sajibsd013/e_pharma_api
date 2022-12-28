@@ -32,36 +32,9 @@ def send_otp_checker(phone, type):
         return res
 
 
-def send_otp(to, otp):
-    token_dist = SMS_TOKEN.objects.get(status="active")
-    token = token_dist.token
-    api_url = token_dist.api_url
-    msg = f"Your Verification Code is {otp}"
-    print('send_otp', to)
-
-    headers = {
-        'Authorization': token,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    }
-
-    data = {
-        'recipient': "+8801771148384",
-        'sender_id': '8809601003724',
-        'message': msg
-    }
-
-    responses = requests.post(url=api_url,  headers=headers,  json=data)
-    response = responses.text
-    print(response, responses)
-
-    # return response
-
-
 def send_sms(to, msg):
-    token_dist = SMS_TOKEN.objects.get(status="active")
-    token = token_dist.token
-    api_url = token_dist.api_url
+    token = 'Bearer 95|kpmjxX6RXffNm1IPzflQcrqmT15o4z08vG5nC2Vp'
+    api_url = 'https://login.esms.com.bd/api/v3/sms/send'
 
     headers = {
         'Authorization': token,
@@ -80,25 +53,32 @@ def send_sms(to, msg):
     print(response, responses)
     return responses.status_code
 
+# def send_sms_d_host(to, msg):
+#     token = 'Bearer 95|kpmjxX6RXffNm1IPzflQcrqmT15o4z08vG5nC2Vp'
+#     api_url = 'https://login.esms.com.bd/api/v3/sms/send'
+
+#     headers = {
+#         'Authorization': token,
+#         'Accept': 'application/json',
+#         'Content-Type': 'application/json',
+#     }
+
+#     data = {
+#         'recipient': to,
+#         'sender_id': '8809601003724',
+#         'message': msg
+#     }
+
+#     responses = requests.post(url=api_url,  headers=headers,  json=data)
+#     response = responses.text
+#     print(response, responses)
+#     return responses.status_code
+
+
+def send_otp(to, otp):
+    msg = f"Your sasthosebok.com Verification Code is {otp}"
+    send_sms(to, msg)
+
 
 def send_admin_notifications(msg):
-    token_dist = SMS_TOKEN.objects.get(status="active")
-    token = token_dist.token
-    api_url = token_dist.api_url
-
-    headers = {
-        'Authorization': token,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    }
-
-    data = {
-        'recipient': "8801959970664",
-        'sender_id': '8809601003724',
-        'message': msg
-    }
-
-    responses = requests.post(url=api_url,  headers=headers,  json=data)
-    response = responses.text
-    print(response, responses)
-    return responses.status_code
+    send_sms("8801959970664", msg)

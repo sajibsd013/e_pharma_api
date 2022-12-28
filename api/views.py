@@ -6,7 +6,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .utils import send_otp_checker, send_sms, send_otp
+from .utils import send_otp_checker, send_otp
 from random import randrange
 from .models import OTP
 # Create your views here.
