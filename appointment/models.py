@@ -41,8 +41,35 @@ class DoctorsAppointment(models.Model):
     payment_status = models.CharField(
         max_length=120, choices=PAYMENT_CHOICES, default="unpaid", )
     service_status = models.CharField(
-        max_length=120, choices=STATUS_CHOICES, default="pending", )
+        max_length=120, choices=STATUS_CHOICES, default="approved", )
     details = models.TextField()
 
     class Meta:
         verbose_name_plural = "Doctors Appointment"
+
+
+
+def upload_to_medicine(instance, filename):
+    return 'images/medicine/{filename}'.format(filename=filename)
+
+class Medicine(models.Model):
+    name = models.CharField(max_length=120)
+    phone = models.CharField(max_length=120)
+    fee = models.CharField(max_length=120, null=True, blank=True, default="")
+    user_id = models.ForeignKey(
+        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True)
+    image_url = models.ImageField(
+        upload_to=upload_to_medicine, null=True, blank=True)
+    created_date = models.DateTimeField(default=now, editable=False)
+    payment_method = models.CharField(
+        max_length=120, choices=PAYMENT_METHOD, default="Bkash", )
+    transaction_id = models.CharField(max_length=120, null=True, blank=True, default="")
+    payment_status = models.CharField(
+        max_length=120, choices=PAYMENT_CHOICES, default="unpaid", )
+    service_status = models.CharField(
+        max_length=120, choices=STATUS_CHOICES, default="pending", )
+    medicine = models.TextField()
+    address = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Home Medicine"
