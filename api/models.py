@@ -32,6 +32,12 @@ class Faqs(models.Model):
         db_table = "Faqs"
 
 
+class Speciality(models.Model):
+    speciality = models.CharField(max_length=120)
+    class Meta:
+        verbose_name_plural = "Doctors Speciality "
+
+
 class OTP(models.Model):
     phone = models.CharField(max_length=120, unique=True)
     otp = models.CharField(max_length=120)

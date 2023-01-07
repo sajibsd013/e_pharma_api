@@ -9,6 +9,7 @@ urlpatterns = [
     path('services/', views.service_list),
     path('services/<int:pk>', views.services_detail),
     path('faqs/', views.faqs_list),
+    path('speciality/', views.speciality_list),
     path('send-otp/', views.set_otp),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

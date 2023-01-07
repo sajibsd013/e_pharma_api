@@ -1,6 +1,6 @@
 from warnings import filters
 from django.contrib import admin
-from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation
+from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation, Speciality
 
 
 # Register your models here.
@@ -46,6 +46,12 @@ class ServicesAdmin(admin.ModelAdmin):
 
 admin.site.register(Services, ServicesAdmin)
 
+class SpecialityAdmin(admin.ModelAdmin):
+    list_display = ["speciality"]
+
+    class Meta:
+        model = Speciality
+admin.site.register(Speciality, SpecialityAdmin)
 
 class FaqsAdmin(admin.ModelAdmin):
     list_display = ["ques", "ans"]
@@ -53,5 +59,7 @@ class FaqsAdmin(admin.ModelAdmin):
     class Meta:
         model = Faqs
 
-
 admin.site.register(Faqs, FaqsAdmin)
+
+
+

@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Services, Faqs, GenaralInformation
-from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer, GenaralInformationSerializer
+from .models import Services, Faqs, GenaralInformation , Speciality
+from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer, GenaralInformationSerializer, SpecialitySerializer
 from rest_framework import viewsets, pagination
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
@@ -37,6 +37,14 @@ def faqs_list(request):
     if request.method == 'GET':
         faqs = Faqs.objects.all()
         serializer = FaqsSerializer(faqs, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def speciality_list(request):
+    if request.method == 'GET':
+        speciality = Speciality.objects.all().order_by('speciality')
+        serializer = SpecialitySerializer(speciality, many=True)
         return Response(serializer.data)
 
 
