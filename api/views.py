@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Services, Faqs, GenaralInformation , Speciality
-from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer, GenaralInformationSerializer, SpecialitySerializer
+from .models import Services, Faqs, GenaralInformation , Speciality, BmiFaqs
+from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer, GenaralInformationSerializer, BmiFaqsSerializer, SpecialitySerializer
 from rest_framework import viewsets, pagination
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
@@ -31,6 +31,13 @@ def services_detail(request, pk):
         serializer = ServiceSerializer(services)
         return Response(serializer.data)
 
+
+@api_view(['GET'])
+def bmi_faqs_list(request):
+    if request.method == 'GET':
+        bmi_faqs = BmiFaqs.objects.all()
+        serializer = BmiFaqsSerializer(bmi_faqs, many=True)
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def faqs_list(request):

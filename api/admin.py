@@ -1,6 +1,6 @@
 from warnings import filters
 from django.contrib import admin
-from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation, Speciality
+from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation, Speciality , BmiFaqs
 
 
 # Register your models here.
@@ -60,6 +60,14 @@ class FaqsAdmin(admin.ModelAdmin):
         model = Faqs
 
 admin.site.register(Faqs, FaqsAdmin)
+
+class BmiFaqsAdmin(admin.ModelAdmin):
+    list_display = ["ques", "ans"]
+
+    class Meta:
+        model = BmiFaqs
+
+admin.site.register(BmiFaqs, BmiFaqsAdmin)
 
 
 

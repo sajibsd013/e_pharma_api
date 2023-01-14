@@ -31,6 +31,14 @@ class Faqs(models.Model):
         verbose_name_plural = "FAQs "
         db_table = "Faqs"
 
+class BmiFaqs(models.Model):
+    ques = models.CharField(max_length=120)
+    ans = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "BMI FAQs "
+        db_table = "BmiFaqs"
+
 
 class Speciality(models.Model):
     speciality = models.CharField(max_length=120)

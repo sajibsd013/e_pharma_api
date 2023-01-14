@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Services, Faqs, OTP, SMS_TOKEN, GenaralInformation , Speciality
+from .models import Services, Faqs, OTP, SMS_TOKEN, GenaralInformation , Speciality , BmiFaqs
 
 
 class GenaralInformationSerializer(serializers.ModelSerializer):
@@ -17,6 +17,11 @@ class ServiceSerializer(serializers.ModelSerializer):
 class FaqsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Faqs
+        fields = "__all__"
+
+class BmiFaqsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BmiFaqs
         fields = "__all__"
 
 class SpecialitySerializer(serializers.ModelSerializer):
