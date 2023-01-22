@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from .serializers import NurseSerializer, CareGiverSerializer, PhysiotherapistSerializer, PartnerSerializer, DoctorSerializer, DMF_DoctorSerializer
-from rest_framework import viewsets, pagination
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework import viewsets
+from rest_framework.parsers import MultiPartParser
 from rest_framework import status
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.utils import send_sms
 from rest_framework.views import APIView
@@ -31,7 +31,7 @@ class DoctotList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
-        doctor = Doctor.objects.all()
+        doctor = Doctor.objects.all().order_by('name').reverse()
         serializer = DoctorSerializer(doctor, many=True)
         return Response(serializer.data)
 

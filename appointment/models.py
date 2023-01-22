@@ -29,10 +29,10 @@ class DoctorsAppointment(models.Model):
     patient_phone = models.CharField(max_length=120)
     type = models.CharField(max_length=120)
     fee = models.CharField(max_length=120)
-    doctor_id = models.ForeignKey(
-        Doctor, verbose_name="Doctor", on_delete=models.CASCADE, null=True, blank=True)
-    user_id = models.ForeignKey(
-        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True)
+    doctor = models.ForeignKey(
+        Doctor, verbose_name="Doctor", on_delete=models.CASCADE, null=True, blank=True , related_name='appointment' )
+    user = models.ForeignKey(
+        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True , related_name='appointment')
     date = models.DateTimeField()
     created_date = models.DateTimeField(default=now, editable=False)
     payment_method = models.CharField(
@@ -49,27 +49,3 @@ class DoctorsAppointment(models.Model):
 
 
 
-def upload_to_medicine(instance, filename):
-    return 'images/medicine/{filename}'.format(filename=filename)
-
-class Medicine(models.Model):
-    name = models.CharField(max_length=120)
-    phone = models.CharField(max_length=120)
-    fee = models.CharField(max_length=120, null=True, blank=True, default="")
-    user_id = models.ForeignKey(
-        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True)
-    image_url = models.ImageField(
-        upload_to=upload_to_medicine, null=True, blank=True)
-    created_date = models.DateTimeField(default=now, editable=False)
-    payment_method = models.CharField(
-        max_length=120, choices=PAYMENT_METHOD, default="Bkash", )
-    transaction_id = models.CharField(max_length=120, null=True, blank=True, default="")
-    payment_status = models.CharField(
-        max_length=120, choices=PAYMENT_CHOICES, default="unpaid", )
-    service_status = models.CharField(
-        max_length=120, choices=STATUS_CHOICES, default="pending", )
-    medicine = models.TextField()
-    address = models.TextField()
-
-    class Meta:
-        verbose_name_plural = "Home Medicine"

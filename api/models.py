@@ -22,7 +22,6 @@ class Services(models.Model):
         verbose_name_plural = "Services"
         db_table = "Services"
 
-
 class Faqs(models.Model):
     ques = models.CharField(max_length=120)
     ans = models.TextField()

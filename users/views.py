@@ -1,7 +1,4 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -10,12 +7,11 @@ from .utils import get_tokens_for_user, isOtpMatcheed
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.decorators import permission_classes, authentication_classes, api_view
+from rest_framework.decorators import permission_classes, authentication_classes
 from .models import MyUser
-from .serializers import UserSerializer
 
-
-from .serializers import RegistrationSerializer, PasswordChangeSerializer, UserSerializer
+from .serializers import RegistrationSerializer, PasswordChangeSerializer
+from .custom_serializers import UserFullSerializer
 # Create your views here.
 
 
@@ -76,7 +72,7 @@ class CurrentLoggedInUser(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    serializer_class = UserSerializer
+    serializer_class = UserFullSerializer
 
     def retrieve(self, request, *args, **kwargs):
         user_profile = self.queryset.get(phone=request.user.phone)
@@ -84,7 +80,7 @@ class CurrentLoggedInUser(viewsets.ModelViewSet):
         return Response({'user': serializer.data})
 
 
-@api_view(['PUT', 'GET', 'DELETE'])
+# @api_view(['PUT', 'GET', 'DELETE'])
 @permission_classes((IsAuthenticated,))
 @authentication_classes((JWTAuthentication,))
 def UserDetail(request, pk):
@@ -97,11 +93,11 @@ def UserDetail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = UserSerializer(user)
+        serializer = UserFullSerializer(user)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = UserSerializer(
+        serializer = UserFullSerializer(
             user, data=request.data)
         if serializer.is_valid():
             serializer.save()

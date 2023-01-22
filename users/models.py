@@ -1,10 +1,8 @@
-from django.utils import timezone
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
-import datetime
 credits = models.PositiveIntegerField(default=100)
 
 
