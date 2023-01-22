@@ -1,22 +1,28 @@
 from .models import Blog
-from .serializers import BlogSerializer
+from .serializers import BlogSerializer, BlogSerializePOST
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from random import randrange
 # Create your views here.
 
 
 @api_view(['GET','Post'])
 def blog_list(request):
     if request.method == 'GET':
-        blog = Blog.objects.select_related().order_by("created_date").reverse()
-        print(blog)
+        # blog = Blog.objects.all().order_by("created_date").reverse()
+        # print(blog)
+        if 'user' in request.GET:
+            print(request.GET['user'])
+            blog = Blog.objects.filter(
+                user=request.GET['user']).order_by("-id")
+        else:
+            blog = Blog.objects.all().order_by("created_date").reverse()
+
         serializer = BlogSerializer(blog, many=True)
         return Response(serializer.data)
     
     if request.method == 'POST':
-        serializer = BlogSerializer(data=request.data)
+        serializer = BlogSerializePOST(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -1,7 +1,5 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 from .views import *
-from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
 # Routers provide an easy way of automatically determining the URL conf.
 

@@ -1,8 +1,5 @@
-from django.shortcuts import render
 from .models import Services, Faqs, GenaralInformation , Speciality, BmiFaqs
 from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer, GenaralInformationSerializer, BmiFaqsSerializer, SpecialitySerializer
-from rest_framework import viewsets, pagination
-from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

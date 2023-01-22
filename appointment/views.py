@@ -28,10 +28,10 @@ def DoctorAppointment(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'GET':
-        if 'user_id' in request.GET:
-            print(request.GET['user_id'])
+        if 'user' in request.GET:
+            print(request.GET['user'])
             services = DoctorsAppointment.objects.filter(
-                user_id=request.GET['user_id']).order_by("-id")
+                user=request.GET['user']).order_by("-id")
 
         else:
             services = DoctorsAppointment.objects.all()

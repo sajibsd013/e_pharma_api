@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from django.shortcuts import render
 from .models import Diagnostic, HomeMedicine
 from .serializers import  DiagnosticSerializer, HomeMedicineSerializer
 from api.utils import send_admin_notifications
@@ -28,10 +27,10 @@ def Medicine(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'GET':
-        if 'user_id' in request.GET:
-            print(request.GET['user_id'])
+        if 'user' in request.GET:
+            print(request.GET['user'])
             services = HomeMedicine.objects.filter(
-                user_id=request.GET['user_id']).order_by("-id")
+                user=request.GET['user']).order_by("-id")
 
         else:
             services = HomeMedicine.objects.all()
@@ -89,10 +88,10 @@ def MobileDiagnostic(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'GET':
-        if 'user_id' in request.GET:
-            print(request.GET['user_id'])
+        if 'user' in request.GET:
+            print(request.GET['user'])
             services = Diagnostic.objects.filter(
-                user_id=request.GET['user_id']).order_by("-id")
+                user=request.GET['user']).order_by("-id")
 
         else:
             services = Diagnostic.objects.all()

@@ -10,8 +10,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import permission_classes, authentication_classes
 from .models import MyUser
 
-from .serializers import RegistrationSerializer, PasswordChangeSerializer
-from .custom_serializers import UserFullSerializer
+from .serializers import RegistrationSerializer, PasswordChangeSerializer , UserSerializer
 # Create your views here.
 
 
@@ -72,7 +71,7 @@ class CurrentLoggedInUser(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    serializer_class = UserFullSerializer
+    serializer_class = UserSerializer
 
     def retrieve(self, request, *args, **kwargs):
         user_profile = self.queryset.get(phone=request.user.phone)
@@ -93,11 +92,11 @@ def UserDetail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = UserFullSerializer(user)
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = UserFullSerializer(
+        serializer = UserSerializer(
             user, data=request.data)
         if serializer.is_valid():
             serializer.save()

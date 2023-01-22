@@ -11,3 +11,14 @@ class BlogSerializer(serializers.ModelSerializer):
 
     def get_user(self, obj):
         return UserSerializer(obj.user).data
+
+
+class BlogSerializePOST(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = "__all__"
+
+
+
+
+

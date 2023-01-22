@@ -1,4 +1,3 @@
-from warnings import filters
 from django.contrib import admin
 from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation, Speciality , BmiFaqs
 

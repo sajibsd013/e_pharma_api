@@ -1,4 +1,3 @@
-from warnings import filters
 from django.contrib import admin
 from .models import Nurse, CareGiver, Physiotherapist, Partner, Doctor, DMF_Doctor
 

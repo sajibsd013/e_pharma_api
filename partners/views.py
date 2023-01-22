@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .serializers import NurseSerializer, CareGiverSerializer, PhysiotherapistSerializer, PartnerSerializer, DoctorSerializer, DMF_DoctorSerializer
 from rest_framework import viewsets
 from rest_framework.parsers import MultiPartParser

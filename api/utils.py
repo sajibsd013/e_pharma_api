@@ -1,6 +1,5 @@
 from users.models import MyUser
-from random import randrange
-from .models import OTP, SMS_TOKEN
+from .models import OTP
 
 import requests
 

@@ -1,12 +1,8 @@
-from django.shortcuts import render
 from .models import Job
 from .serializers import JobSerializer
-from rest_framework import viewsets, pagination
-from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from random import randrange
 # Create your views here.
 
 
