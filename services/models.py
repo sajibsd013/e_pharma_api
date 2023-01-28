@@ -29,7 +29,7 @@ class Diagnostic(models.Model):
     name = models.CharField(max_length=120)
     phone = models.CharField(max_length=120)
     fee = models.CharField(max_length=120, null=True, blank=True, default="")
-    user = models.ForeignKey(
+    user_id = models.ForeignKey(
         MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True, related_name='diagnostic')
     image_url = models.ImageField(
         upload_to=upload_to_diagnostic, null=True, blank=True)
@@ -55,7 +55,7 @@ class HomeMedicine(models.Model):
     name = models.CharField(max_length=120)
     phone = models.CharField(max_length=120)
     fee = models.CharField(max_length=120, null=True, blank=True, default="")
-    user = models.ForeignKey(
+    user_id = models.ForeignKey(
         MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True, related_name='medicine')
     image_url = models.ImageField(
         upload_to=upload_to_medicine, null=True, blank=True)

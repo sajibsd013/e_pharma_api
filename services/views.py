@@ -27,10 +27,10 @@ def Medicine(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'GET':
-        if 'user' in request.GET:
-            print(request.GET['user'])
+        if 'user_id' in request.GET:
+            print(request.GET['user_id'])
             services = HomeMedicine.objects.filter(
-                user=request.GET['user']).order_by("-id")
+                user_id=request.GET['user_id']).order_by("-id")
 
         else:
             services = HomeMedicine.objects.all()

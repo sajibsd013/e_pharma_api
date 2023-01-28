@@ -29,9 +29,9 @@ class DoctorsAppointment(models.Model):
     patient_phone = models.CharField(max_length=120)
     type = models.CharField(max_length=120)
     fee = models.CharField(max_length=120)
-    doctor = models.ForeignKey(
+    doctor_id = models.ForeignKey(
         Doctor, verbose_name="Doctor", on_delete=models.CASCADE, null=True, blank=True , related_name='appointment' )
-    user = models.ForeignKey(
+    user_id = models.ForeignKey(
         MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True , related_name='appointment')
     date = models.DateTimeField()
     created_date = models.DateTimeField(default=now, editable=False)
