@@ -48,8 +48,8 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
-    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=5000),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=5000),
 }
 # Application definition
 
@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'services',
     'career',
     'blog',
+    'shop',
 
 ]
 

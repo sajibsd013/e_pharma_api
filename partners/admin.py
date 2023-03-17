@@ -7,6 +7,7 @@ from .models import Nurse, CareGiver, Physiotherapist, Partner, Doctor, DMF_Doct
 
 class DMF_DoctorAdmin(admin.ModelAdmin):
     list_display = ["name", "specialty", "type", "mobile", "status"]
+
     search_fields = ("name", "working_area", "status")
     list_filter = ("working_area", "specialty", "type", "status")
 
@@ -18,7 +19,9 @@ admin.site.register(DMF_Doctor, DMF_DoctorAdmin)
 
 
 class DoctorAdmin(admin.ModelAdmin):
-    list_display = ["name", "specialty", "type", "mobile", "status"]
+    # list_display = ["name", "specialty", "type", "mobile", "status"]
+    list_display = [field.name for field in Doctor._meta.fields if field.name != "id"]
+
     search_fields = ("name", "working_area", "status")
     list_filter = ("working_area", "specialty", "type", "status")
 

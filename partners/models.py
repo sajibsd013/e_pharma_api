@@ -7,6 +7,10 @@ STATUS_CHOICES = (
     ('pending', 'pending'),
     ('approved', 'approved'),
 )
+CAT_CHOICES = (
+    ('none', 'none'),
+    ('top', 'top'),
+)
 GENDER = (
     ('male', 'male'),
     ('female', 'female'),
@@ -93,6 +97,8 @@ class Doctor(models.Model):
         max_length=120, null=True, blank=True)
     fee_video_call = models.CharField(
         max_length=120, null=True, blank=True)
+    fee_home_call = models.CharField(
+        max_length=120, null=True, blank=True)
     payment_method = models.CharField(max_length=120, null=True)
     payment_number = models.CharField(max_length=120, null=True)
     whatsapp_number = models.CharField(max_length=120, null=True, blank=True)
@@ -104,6 +110,10 @@ class Doctor(models.Model):
     institution_or_chamber_address = models.TextField(
         null=True, blank=True, )
     short_description = models.TextField()
+
+    cat = models.CharField(
+        max_length=120, choices=CAT_CHOICES, default="none", null=True )
+    
     created_date = models.DateTimeField(default=now, editable=False)
 
     class Meta:
