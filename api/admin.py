@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation, Speciality , BmiFaqs
+from .models import Faqs, Services, OTP, SMS_TOKEN, GenaralInformation, Speciality , BmiFaqs, JournalGuidelines
 
 
 # Register your models here.
@@ -42,8 +42,14 @@ class ServicesAdmin(admin.ModelAdmin):
     class Meta:
         model = Services
 
+class JournalGuidelinesAdmin(admin.ModelAdmin):
+    list_display = ["title"]
 
-admin.site.register(Services, ServicesAdmin)
+    class Meta:
+        model = JournalGuidelines
+
+
+admin.site.register(JournalGuidelines, JournalGuidelinesAdmin)
 
 class SpecialityAdmin(admin.ModelAdmin):
     list_display = ["speciality"]

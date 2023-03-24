@@ -4,6 +4,7 @@ from api import views
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    path('guidelines/', views.guidelines_list),
     path('services/', views.service_list),
     path('services/<int:pk>', views.services_detail),
     path('faqs/', views.faqs_list),

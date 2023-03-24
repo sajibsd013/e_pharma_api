@@ -1,6 +1,11 @@
 from rest_framework import serializers
-from .models import Services, Faqs, OTP, SMS_TOKEN, GenaralInformation , Speciality , BmiFaqs
+from .models import Services, Faqs, OTP, SMS_TOKEN, GenaralInformation , Speciality , BmiFaqs,JournalGuidelines
 
+
+class JournalGuidelinesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JournalGuidelines
+        fields = "__all__"
 
 class GenaralInformationSerializer(serializers.ModelSerializer):
     class Meta:

@@ -77,3 +77,18 @@ class GenaralInformation(models.Model):
     class Meta:
         verbose_name_plural = "Genaral Information"
         db_table = "GenaralInformation"
+
+
+
+# lets us explicitly set upload path and filename
+def upload_to_pdf(instance, filename):
+    return 'pdf/{filename}'.format(filename=filename)
+
+class JournalGuidelines(models.Model):
+    title = models.CharField(max_length=120)
+    paper = models.FileField(upload_to=upload_to_pdf)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Journal Guidelines"
+        db_table = "JournalGuidelines"
