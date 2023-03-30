@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.utils import send_sms
 from rest_framework.views import APIView
-from .models import Doctor
+from .models import Doctor, Partner, CareGiver , Physiotherapist, Nurse
 # Create your views here.
 
 
@@ -67,8 +67,8 @@ def dmf_doctor(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-def partner(request):
+@api_view(['POST','GET'])
+def pharmacy(request):
     if request.method == 'POST':
         serializer = PartnerSerializer(data=request.data)
 
@@ -80,10 +80,14 @@ def partner(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['POST'])
-def care_giver(request):
+    
+    elif request.method == 'GET':
+        data_list = Partner.objects.all()
+        serializer = PartnerSerializer(data_list, many=True)
+        return Response(serializer.data)
+    
+@api_view(['POST','GET'])
+def caregiver(request):
     if request.method == 'POST':
         serializer = CareGiverSerializer(data=request.data)
         mobile = request.data.get("mobile")
@@ -95,9 +99,14 @@ def care_giver(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'GET':
+        data_list = CareGiver.objects.all()
+        serializer = CareGiverSerializer(data_list, many=True)
+        return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(['POST','GET'])
 def physiotherapist(request):
     if request.method == 'POST':
         serializer = PhysiotherapistSerializer(data=request.data)
@@ -110,10 +119,15 @@ def physiotherapist(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'GET':
+        data_list = Physiotherapist.objects.all()
+        serializer = PhysiotherapistSerializer(data_list, many=True)
+        return Response(serializer.data)
 
 
-@api_view(['POST'])
-def nurse_regi(request):
+@api_view(['POST','GET'])
+def nurse(request):
     if request.method == 'POST':
         serializer = NurseSerializer(data=request.data)
         mobile = request.data.get("mobile")
@@ -125,3 +139,8 @@ def nurse_regi(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'GET':
+        data_list = Nurse.objects.all()
+        serializer = NurseSerializer(data_list, many=True)
+        return Response(serializer.data)
