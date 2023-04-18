@@ -72,3 +72,45 @@ class Order(models.Model):
         verbose_name_plural = "Order"
         db_table = "Order"
 
+
+
+# lets us explicitly set upload path and filename
+def upload_to_medicine(instance, filename):
+    return 'images/medicine/{filename}'.format(filename=filename)
+
+
+TYPE_CHOICES = (
+    ('Tablet', 'Tablet'),
+    ('Capsule', 'Capsule'),
+    ('Injection', 'Injection'),
+    ('Pediatric Drop', 'Pediatric Drop'),
+    ('Suspension', 'Suspension'),
+    ('Powder for Suspension', 'Powder for Suspension'),
+    ('IV Injection', 'IV Injection'),
+    ('Cream', 'Cream'),
+    ('Gel', 'Gel'),
+    ('Infusion', 'Infusion'),
+    ('Nebulizer  Solution', 'Nebulizer  Solution'),
+    ('Syrup', 'Syrup'),
+    ('Sachet', 'Sachet'),
+    ('Eye Drop', 'Eye Drop'),
+    ('Eye Oinment', 'Eye Oinment'),
+)
+
+class Medicine(models.Model):
+    medicine_name = models.CharField(max_length=120)
+    weight = models.CharField(max_length=120)
+    medicine_type = models.CharField(
+        max_length=120, choices=TYPE_CHOICES)
+    generic_name = models.CharField(max_length=120,null=True)
+    brand_name = models.CharField(max_length=120)
+    unit_price = models.CharField(max_length=120, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+
+    def __str__(self):
+        return f"{self.medicine_name} - ({self.medicine_type}) - ({self.brand_name})"
+
+    class Meta:
+        verbose_name_plural = "medicine"
+        db_table = "medicine"

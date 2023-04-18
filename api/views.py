@@ -96,7 +96,7 @@ def set_otp(request):
                         send_otp(phone, otp)
 
                         serializer.save()
-                        return Response({"otp": otp, "to": phone}, status=status.HTTP_201_CREATED)
+                        return Response({"to": phone}, status=status.HTTP_201_CREATED)
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
             except:

@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Product, Order
-from .serializers import ProductSerializer ,OrderSerializer
+from .models import Product, Order, Medicine
+from .serializers import ProductSerializer ,OrderSerializer, MedicineSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -76,5 +76,12 @@ def product_list(request):
     if request.method == 'GET':
         data = Product.objects.all()
         serializer = ProductSerializer(data, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def medicine_list(request):
+    if request.method == 'GET':
+        data = Medicine.objects.all()
+        serializer = MedicineSerializer(data, many=True)
         return Response(serializer.data)
 
