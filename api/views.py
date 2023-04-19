@@ -3,9 +3,11 @@ from .serializers import ServiceSerializer, FaqsSerializer, OtpSerializer, Genar
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .utils import send_otp_checker, send_otp
+from .utils import send_otp_checker, send_otp, promotional_sms
 from random import randrange
 from .models import OTP
+from users.models import MyUser
+
 # Create your views here.
 
 
@@ -66,6 +68,20 @@ def genaral_information(request):
         serializer = GenaralInformationSerializer(
             genaral_information, many=True)
         return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def send_promotional_sms(request):
+    if request.method == 'POST':
+        msg = request.data.get("msg")
+        to = request.data.get("to")
+        # print(msg,to)
+        res = promotional_sms(to,msg)
+        return Response(res, status=status.HTTP_201_CREATED)
+        # return Response("Unknown Error!", status=status.HTTP_400_BAD_REQUEST)
+    
+    
 
 
 # @custom_view_decorator

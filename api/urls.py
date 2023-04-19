@@ -11,5 +11,6 @@ urlpatterns = [
     path('bmi-faqs/', views.bmi_faqs_list),
     path('speciality/', views.speciality_list),
     path('send-otp/', views.set_otp),
+    path('send-sms', views.send_promotional_sms),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

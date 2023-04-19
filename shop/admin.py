@@ -32,7 +32,7 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 class MedicineAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Medicine._meta.fields if field.name != "id"]
+    list_display = [field.name for field in Medicine._meta.fields if field.name != "id" and field.name != "description"]
 
     class Meta:
         model = Medicine
