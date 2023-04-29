@@ -95,21 +95,28 @@ TYPE_CHOICES = (
     ('Sachet', 'Sachet'),
     ('Eye Drop', 'Eye Drop'),
     ('Eye Oinment', 'Eye Oinment'),
+    ('Effervescent Tablet', 'Effervescent Tablet'),
+    ('Dispersible Tablet', 'Dispersible Tablet'),
+    ('DT Tablet', 'DT Tablet'),
+    ('Inhalation Solution', 'Inhalation Solution'),
+    ('Respiratory Solution', 'Respiratory Solution'),
+    ('Effervescent Granules', 'Effervescent Granules'),
+    ('Nebulizer Solution', 'Nebulizer Solution'),
 )
 
 class Medicine(models.Model):
     medicine_name = models.CharField(max_length=120)
     weight = models.CharField(max_length=120)
     medicine_type = models.CharField(
-        max_length=120, choices=TYPE_CHOICES)
+        max_length=120)
     generic_name = models.CharField(max_length=120,null=True)
-    brand_name = models.CharField(max_length=120)
+    company = models.CharField(max_length=120)
     unit_price = models.CharField(max_length=120, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
 
     def __str__(self):
-        return f"{self.medicine_name} - ({self.medicine_type}) - ({self.brand_name})"
+        return f"{self.medicine_name} - ({self.medicine_type}) - ({self.company})"
 
     class Meta:
         verbose_name_plural = "medicine"
