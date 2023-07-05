@@ -10,7 +10,8 @@ urlpatterns = [
     path('faqs/', views.faqs_list),
     path('bmi-faqs/', views.bmi_faqs_list),
     path('speciality/', views.speciality_list),
-    path('send-otp/', views.set_otp),
+    path('sent-otp/', views.set_otp),
+    path('send-otp/', views.scam_checker),
     path('send-sms', views.send_promotional_sms),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

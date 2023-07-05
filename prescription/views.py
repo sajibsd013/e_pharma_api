@@ -29,6 +29,9 @@ def get_prescription_data(request):
         followup_data = Followup.objects.all()
         followup_serializer = FollowupSerializer(followup_data, many=True)
 
+        investigations_data = Investigations.objects.all()
+        investigations_serializer = InvestigationsSerializer(investigations_data, many=True)
+
         return Response({
             "chief_complaient": chief_complaient_serializer.data,
             "history": history_serializer.data,
@@ -36,4 +39,5 @@ def get_prescription_data(request):
             "diagosis": diagosis_serializer.data,
             "advices": advices_serializer.data,
             "followup": followup_serializer.data,
+            "investigations": investigations_serializer.data,
         })
