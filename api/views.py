@@ -84,15 +84,12 @@ def send_promotional_sms(request):
     
 
 
-@custom_view_decorator
+# @custom_view_decorator
 @api_view(['POST'])
 def set_otp(request):
     if request.method == 'POST':
         phone = request.data.get("phone")
         type = request.data.get("type")
-        print(phone)
-        ip_address = request.META.get('REMOTE_ADDR')
-        print(ip_address)
 
         otp = randrange(1000, 9999)
         check = send_otp_checker(phone, type)
@@ -102,14 +99,14 @@ def set_otp(request):
                 otp_dict = OTP.objects.filter(phone=phone).update(otp=otp)
                 if otp_dict:
                     # send otp
-                    # send_otp(phone, otp)
+                    send_otp(phone, otp)
                     return Response({"otp": otp, "to": phone}, status=status.HTTP_201_CREATED)
                 else:
                     serializer = OtpSerializer(
                         data={"phone": phone, "otp": otp})
                     if serializer.is_valid():
                         # send otp
-                        # send_otp(phone, otp)
+                        send_otp(phone, otp)
 
                         serializer.save()
                         return Response({"to": phone}, status=status.HTTP_201_CREATED)

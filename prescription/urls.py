@@ -6,4 +6,8 @@ from . import views
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('data/', views.get_prescription_data),
+    path('pres/', views.prescriptions),
+    path('pres/<int:pk>', views.prescriptions_detail),
+    path('doctor/', views.doctor_info),
+    path('doctor/<int:pk>', views.doctor_info_detail),
 ]

@@ -2,6 +2,16 @@ from rest_framework import serializers
 from .models import *
 
 
+class DoctorInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoctorInfo
+        fields = "__all__"
+
+class PrescriptionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Prescriptions
+        fields = "__all__"
+
 class ChiefComplaientSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChiefComplaient

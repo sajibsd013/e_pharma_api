@@ -1,6 +1,23 @@
 from django.db import models
+from users.models import MyUser
 
 # Create your models here.
+class Prescriptions(models.Model):
+    prescription = models.TextField()
+    user_id = models.ForeignKey(
+        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True )
+    class Meta:
+        verbose_name_plural = "Prescriptions"
+        # db_table = "Prescriptions"
+
+class DoctorInfo(models.Model):
+    doctor = models.TextField()
+    user_id = models.ForeignKey(
+        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True )
+    class Meta:
+        verbose_name_plural = "Doctor Info"
+        # db_table = "Prescriptions"
+
 class ChiefComplaient(models.Model):
     chief_complaient = models.CharField(max_length=255)
     class Meta:

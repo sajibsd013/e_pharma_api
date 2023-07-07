@@ -4,6 +4,18 @@ from .models import *
 
 # Register your models here.
 
+class DoctorInfoAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in DoctorInfo._meta.fields if field.name != "id"]
+    class Meta:
+        model = DoctorInfo
+admin.site.register(DoctorInfo, DoctorInfoAdmin)
+
+class PrescriptionsAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Prescriptions._meta.fields if field.name != "id"]
+    class Meta:
+        model = Prescriptions
+admin.site.register(Prescriptions, PrescriptionsAdmin)
+
 class ChiefComplaientAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ChiefComplaient._meta.fields if field.name != "id"]
     class Meta:
