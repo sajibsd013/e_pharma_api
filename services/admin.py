@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Diagnostic , HomeMedicine
+from .models import Diagnostic , HomeMedicine, DeviceCircumcision
 
 
 class HomeMedicineAdmin(admin.ModelAdmin):
@@ -21,3 +21,13 @@ class DiagnosticAdmin(admin.ModelAdmin):
 
 admin.site.register(Diagnostic,
                     DiagnosticAdmin)
+
+class DeviceCircumcisionAdmin(admin.ModelAdmin):
+    list_display = ["child_name", "phone", "address"]
+
+    class Meta:
+        model = DeviceCircumcision
+
+
+admin.site.register(DeviceCircumcision,
+                    DeviceCircumcisionAdmin)

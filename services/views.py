@@ -1,9 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Diagnostic, HomeMedicine
-from .serializers import  DiagnosticSerializer, HomeMedicineSerializer
-from api.utils import send_admin_notifications
+from .models import Diagnostic, HomeMedicine, DeviceCircumcision
+from .serializers import  DiagnosticSerializer, HomeMedicineSerializer, DeviceCircumcisionSerializer
+from api.utils import send_admin_notifications, send_sms
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from rest_framework.decorators import permission_classes, authentication_classes
@@ -127,5 +127,65 @@ def MobileDiagnosticDetails(request, pk):
 
     elif request.method == 'DELETE':
         Mobile_Diagnostic.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST', 'GET'])
+@permission_classes((IsAuthenticated,))
+@authentication_classes((JWTAuthentication,))
+def MobileDeviceCircumcision(request):
+    if request.method == 'POST':
+        serializer = DeviceCircumcisionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            msg = "Please confirm Device Circumcision Services"
+            send_admin_notifications(msg)
+            msg_to_user = "ধন্যবাদ প্রিয় গ্রাহক আপনার আবেদনটি সাদরে গ্রহণ করা হলো স্বাস্থ্যসেবক ডট কম।"
+            to = request.data['phone']
+            send_sms(to, msg_to_user)
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'GET':
+        if 'user' in request.GET:
+            print(request.GET['user'])
+            services = DeviceCircumcision.objects.filter(
+                user=request.GET['user']).order_by("-id")
+
+        else:
+            services = DeviceCircumcision.objects.all()
+        serializer = DiagnosticSerializer(services, many=True)
+
+        return Response(serializer.data)
+
+
+
+@api_view(['PUT', 'GET', 'DELETE'])
+@permission_classes((IsAuthenticated,))
+@authentication_classes((JWTAuthentication,))
+def MobileDeviceCircumcisionDetails(request, pk):
+    """
+    Retrieve, update or delete a code  MobileDiagnosticDetails.
+    """
+    try:
+        Device_Circumcision = DeviceCircumcision.objects.get(pk=pk)
+    except Device_Circumcision.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = DeviceCircumcisionSerializer(Device_Circumcision)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = DeviceCircumcisionSerializer(
+            Device_Circumcision, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        Device_Circumcision.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 

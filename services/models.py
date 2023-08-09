@@ -72,3 +72,24 @@ class HomeMedicine(models.Model):
 
     class Meta:
         verbose_name_plural = "Home Medicine"
+
+
+class DeviceCircumcision(models.Model):
+    child_name = models.CharField(max_length=120)
+    gurdians_name = models.CharField(max_length=120)
+    phone = models.CharField(max_length=120)
+    fee = models.CharField(max_length=120, null=True, blank=True, default="")
+    user_id = models.ForeignKey(
+        MyUser, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True, related_name='DeviceCircumcision')
+    created_date = models.DateTimeField(default=now, editable=False)
+    payment_method = models.CharField(
+        max_length=120, choices=PAYMENT_METHOD, default="Bkash", )
+    transaction_id = models.CharField(max_length=120, null=True, blank=True, default="")
+    payment_status = models.CharField(
+        max_length=120, choices=PAYMENT_CHOICES, default="unpaid", )
+    service_status = models.CharField(
+        max_length=120, choices=STATUS_CHOICES, default="pending", )
+    address = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Device Circumcision"

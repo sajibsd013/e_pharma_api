@@ -128,3 +128,5 @@ def send_otp(to, otp):
 
 def send_admin_notifications(msg):
     send_sms("8801959970664", msg)
+
+

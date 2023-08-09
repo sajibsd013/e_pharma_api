@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import MobileDiagnostic, MobileDiagnosticDetails, Medicine, MedicineDetails
+from .views import MobileDiagnostic, MobileDiagnosticDetails, Medicine, MedicineDetails, MobileDeviceCircumcision, MobileDeviceCircumcisionDetails
 from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
 # Routers provide an easy way of automatically determining the URL conf.
@@ -12,4 +12,7 @@ urlpatterns = [
     path('diagnostic/<int:pk>/', MobileDiagnosticDetails),
     path('medicine/', Medicine),
     path('medicine/<int:pk>/', MedicineDetails),
+    path('device-circumcision/', MobileDeviceCircumcision),
+    path('device-circumcision/<int:pk>/', MobileDeviceCircumcisionDetails),
+
 ]
